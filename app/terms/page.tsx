@@ -24,7 +24,7 @@ export default async function TermsPage() {
       <div className="max-w-3xl mx-auto px-4 py-10">
         <article
           id="terms-article"
-          className="prose prose-invert sm:prose-lg"
+          className="markdown prose prose-invert sm:prose-lg"
           dangerouslySetInnerHTML={{ __html: contentHtml }}
         />
       </div>
