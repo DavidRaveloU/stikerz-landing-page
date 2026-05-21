@@ -1,0 +1,148 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/* Stikerz Dark Theme - Verde Limón #C8F04A */
+:root {
+  /* Main colors */
+  --background: #0d0d0f;
+  --foreground: #f0ede8;
+  --card: #18181c;
+  --card-foreground: #f0ede8;
+  --popover: #18181c;
+  --popover-foreground: #f0ede8;
+
+  /* Primary - Verde Limón */
+  --primary: #c8f04a;
+  --primary-foreground: #0d0d0f;
+
+  /* Secondary */
+  --secondary: #18181c;
+  --secondary-foreground: #f0ede8;
+
+  /* Muted */
+  --muted: #18181c;
+  --muted-foreground: #888888;
+
+  /* Accent */
+  --accent: #c8f04a;
+  --accent-foreground: #0d0d0f;
+
+  /* Destructive */
+  --destructive: #ef4444;
+  --destructive-foreground: #f0ede8;
+
+  /* Border & Input */
+  --border: #444444;
+  --input: #444444;
+  --ring: #c8f04a;
+
+  /* Charts */
+  --chart-1: #c8f04a;
+  --chart-2: #888888;
+  --chart-3: #444444;
+  --chart-4: #f0ede8;
+  --chart-5: #18181c;
+
+  --radius: 0.75rem;
+
+  /* Surface color */
+  --surface: #18181c;
+  --surface-foreground: #f0ede8;
+}
+
+@theme inline {
+  --font-sans: "Space Grotesk", "Inter", "Geist", sans-serif;
+  --font-mono: "Geist Mono", monospace;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --color-surface: var(--surface);
+  --color-surface-foreground: var(--surface-foreground);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-family: var(--font-sans);
+  }
+
+  /* Custom scrollbar for dark theme */
+  ::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0d0d0f;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: #444444;
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: #888888;
+  }
+}
+
+/* Smooth scroll with snap */
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  scroll-padding-top: 5rem;
+}
+
+/* Snap sections */
+.snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Perspective for 3D effects */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.preserve-3d {
+  transform-style: preserve-3d;
+}
+
+/* Selection color */
+::selection {
+  background: #c8f04a;
+  color: #0d0d0f;
+}

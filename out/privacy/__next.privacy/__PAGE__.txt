@@ -1,0 +1,124 @@
+1:"$Sreact.fragment"
+4:I[99674,["/stikerz-landing-page/_next/static/chunks/0u58k8g-aoqdm.js","/stikerz-landing-page/_next/static/chunks/09mzkwykgmgkt.js"],"OutletBoundary"]
+5:"$Sreact.suspense"
+2:T2226,<h1>Privacy Policy for Stikerz</h1>
+<p>Effective date: May 11, 2026</p>
+<p>This Privacy Policy explains how Stikerz handles information when you use the app. Stikerz is a personal project maintained by an independent developer. It is designed to create sticker packs from TikTok videos, Instagram videos, and videos stored on your own device.</p>
+<h2>1. Controller and scope</h2>
+<p>For the purposes of this policy, the controller is the independent developer who operates Stikerz.</p>
+<p>Stikerz is intended for general audiences worldwide, except where local laws, platform rules, or third-party service availability limit use.</p>
+<h2>2. Core privacy approach</h2>
+<p>Stikerz is built to work without accounts, sign-in, or a dedicated backend. In normal use, the app does not send your media to our servers because we do not operate a user data backend.</p>
+<p>Most processing happens locally on your device. The app uses third-party services only for the limited purposes described below.</p>
+<h2>3. Information we do not collect for our own backend</h2>
+<p>We do not intentionally collect, store, or maintain our own copy of:</p>
+<ul>
+<li>Names</li>
+<li>Email addresses</li>
+<li>Phone numbers</li>
+<li>Contacts</li>
+<li>Chats or message content</li>
+<li>Account credentials</li>
+<li>Payment information</li>
+<li>Precise location</li>
+<li>Browsing history</li>
+<li>Analytics for a proprietary backend, because we do not operate one</li>
+</ul>
+<p>We also do not require registration or user accounts.</p>
+<h2>4. Information processed locally on your device</h2>
+<p>To provide the sticker-creation features, Stikerz may process the following information locally on your device:</p>
+<ul>
+<li>Videos you select from your device storage</li>
+<li>TikTok or Instagram links you paste into the app</li>
+<li>Sticker pack names, authors, cover images, and generated sticker files</li>
+<li>Local app state such as onboarding completion and other settings needed for the app to work</li>
+</ul>
+<p>This information is used only to create, preview, organize, export, and manage sticker packs on your device.</p>
+<h2>5. Permissions used by the app</h2>
+<p>Stikerz requests only the permissions required for its core features.</p>
+<h3>Internet access</h3>
+<p>Internet access is used to:</p>
+<ul>
+<li>Resolve supported TikTok and Instagram links so the app can create stickers from online videos that you choose</li>
+<li>Load and display advertising from Google AdMob</li>
+</ul>
+<p>Stikerz does not use internet access to track your browsing activity or to send your personal media to our own backend, because no such backend exists.</p>
+<h3>Storage or media access</h3>
+<p>Storage or media access is used so you can:</p>
+<ul>
+<li>Select your own local videos</li>
+<li>Save sticker files generated on your device</li>
+<li>Manage sticker packs locally</li>
+</ul>
+<p>The app requests only the access necessary for the feature you are using.</p>
+<h2>6. How sticker creation works</h2>
+<p>Stikerz converts videos into stickers on your device using local processing.</p>
+<p>When you provide a TikTok or Instagram link, the app may contact third-party services to obtain a playable media URL needed to complete the conversion. These requests happen only when you choose to use those supported link-based features.</p>
+<p>Stikerz does not host, mirror, archive, or publish your media on our own servers.</p>
+<h2>7. WhatsApp integration</h2>
+<p>Stikerz can export sticker packs to WhatsApp using WhatsApp's public integration flow.</p>
+<p>This integration is limited to the data required to import a sticker pack, such as the pack name, cover image, and sticker files. Stikerz does not access your WhatsApp chats, contacts, message history, or account credentials.</p>
+<h2>8. Advertising and third-party SDKs</h2>
+<p>Stikerz displays ads through Google AdMob.</p>
+<p>Google may collect and process certain information through its advertising SDKs to serve, measure, and improve ads. This may include device-related information, advertising identifiers, IP address, ad interaction data, and diagnostic data, subject to Google's own privacy practices.</p>
+<p>We do not operate a separate advertising analytics backend and we do not use ad data for our own profiling.</p>
+<p>For information about how Google handles data, review Google's privacy policy and AdMob policies.</p>
+<h2>9. Third-party services</h2>
+<p>Stikerz may interact with the following third-party services:</p>
+<ul>
+<li>Google AdMob, for advertising</li>
+<li>TikTok-related conversion services, for resolving supported TikTok links</li>
+<li>Instagram-related conversion services, for resolving supported Instagram links</li>
+<li>WhatsApp, for exporting sticker packs</li>
+<li>Native media and processing libraries, for local conversion on the device</li>
+</ul>
+<p>These third parties may process information under their own terms and privacy policies.</p>
+<h2>10. Legal basis for processing</h2>
+<p>Depending on your location, the legal basis for processing may include:</p>
+<ul>
+<li>Performance of a service you request, when the app processes media so it can create stickers</li>
+<li>Legitimate interests, such as operating the app, maintaining security, and showing non-essential functionality</li>
+<li>Consent or similar permissions where required by law, especially for advertising or device permissions</li>
+</ul>
+<p>If local law requires a different legal basis, that law will apply.</p>
+<h2>11. Data storage and retention</h2>
+<p>Because Stikerz does not have its own backend, app content is stored locally on your device.</p>
+<p>This may include:</p>
+<ul>
+<li>Sticker pack metadata</li>
+<li>Generated sticker files</li>
+<li>Cover images</li>
+<li>Temporary working files created during conversion</li>
+<li>App state such as onboarding completion</li>
+</ul>
+<p>You can delete the app or clear its local data to remove content stored on your device.</p>
+<p>Temporary files may be created while processing a sticker and may be removed automatically after processing finishes. Some generated files may remain on your device if you choose to keep them.</p>
+<h2>12. Security</h2>
+<p>We follow a privacy-first design by keeping processing local whenever possible and by not operating a custom user data backend.</p>
+<p>No method of storage or transmission is completely secure. If third-party services are used, they may process data independently according to their own infrastructure and policies.</p>
+<h2>13. Children’s privacy</h2>
+<p>Stikerz is intended for a general audience and is not knowingly directed to children. We do not knowingly collect personal data from children because the app does not operate a personal-data collection system.</p>
+<p>If a parent or guardian believes a child has provided personal information to a third-party service used by the app, they should contact that service provider and may also contact us.</p>
+<h2>14. International use and transfers</h2>
+<p>Stikerz is intended to be available internationally, subject to local laws, platform restrictions, and third-party service availability.</p>
+<p>Because some app functions rely on third-party services, data may be processed in jurisdictions outside your own country according to the policies of those services.</p>
+<h2>15. Your choices and rights</h2>
+<p>Depending on where you live, you may have rights related to privacy and personal data. These may include the right to access, correct, delete, or restrict certain data, or to object to certain processing.</p>
+<p>In practice, because Stikerz does not maintain a user account system or a proprietary data backend, many requests can only concern data processed by third-party services or data stored locally on your device.</p>
+<p>You can also control privacy-related choices by:</p>
+<ul>
+<li>Not providing TikTok or Instagram links if you do not want the app to contact those services</li>
+<li>Denying permissions you do not want to grant</li>
+<li>Deleting local app data or uninstalling the app if you want to remove stored files</li>
+<li>Reviewing Google settings for advertising preferences if you want to limit ad personalization on your device</li>
+</ul>
+<h2>16. Changes to this policy</h2>
+<p>We may update this Privacy Policy from time to time to reflect changes in the app, third-party services, legal requirements, or platform guidance. The updated version will be published here with a revised effective date.</p>
+<h2>17. Contact</h2>
+<p>Stikerz is a personal project, not a company.</p>
+<p>If you have questions about this Privacy Policy or your data, contact us through the privacy request form below:</p>
+<p>Form: https://forms.gle/ZoeEPRKKG8edsw7n9</p>
+<p>If you prefer email, add your public contact address here before publishing.</p>
+0:{"rsc":["$","$1","c",{"children":[["$","main",null,{"className":"min-h-screen bg-background","children":["$","div",null,{"className":"max-w-3xl mx-auto px-4 py-10","children":["$","article",null,{"id":"privacy-article","className":"prose prose-invert sm:prose-lg","dangerouslySetInnerHTML":{"__html":"$2"}}]}]}],null,"$L3"]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"DxwDqBj9_3NMebrD9E58A"}
+3:["$","$L4",null,{"children":["$","$5",null,{"name":"Next.MetadataOutlet","children":"$@6"}]}]
+6:null
