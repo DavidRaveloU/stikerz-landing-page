@@ -43,7 +43,7 @@ export function Features() {
   return (
     <section
       ref={containerRef}
-      className="relative h-screen flex items-center overflow-hidden"
+      className="relative md:h-screen min-h-screen flex items-center overflow-hidden py-12 md:py-0"
     >
       {/* Animated background shapes */}
       <motion.div
