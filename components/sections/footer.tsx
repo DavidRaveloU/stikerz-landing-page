@@ -82,10 +82,16 @@ export function Footer() {
             {new Date().getFullYear()} Stikerz. {content.footer.copyright}
           </p>
           <div className="flex items-center gap-4">
-            <Link href="/privacy" className="hover:text-primary transition-colors">
+            <Link
+              href="/privacy"
+              className="hover:text-primary transition-colors"
+            >
               {content.footer.links.privacy}
             </Link>
-            <Link href="/terms" className="hover:text-primary transition-colors">
+            <Link
+              href="/terms"
+              className="hover:text-primary transition-colors"
+            >
               {content.footer.links.terms}
             </Link>
           </div>
