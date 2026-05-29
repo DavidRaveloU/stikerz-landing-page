@@ -51,6 +51,8 @@ export function VideoDemo() {
       if (!isFullscreen) {
         await playerRef.current.requestFullscreen?.();
         setIsFullscreen(true);
+        // Auto-hide controls on mobile fullscreen
+        setShowControls(false);
         if (videoRef.current && !isPlaying) {
           videoRef.current.play().catch(() => {});
           setIsPlaying(true);
@@ -60,6 +62,8 @@ export function VideoDemo() {
           await document.exitFullscreen?.();
         }
         setIsFullscreen(false);
+        // Restore controls when exiting fullscreen
+        setShowControls(true);
       }
     } catch (err) {
       console.error("Fullscreen error:", err);
@@ -78,6 +82,18 @@ export function VideoDemo() {
   }, []);
 
   const handleMouseMove = () => {
+    setShowControls(true);
+    if (controlsTimeoutRef.current) {
+      clearTimeout(controlsTimeoutRef.current);
+    }
+    if (isFullscreen && isPlaying) {
+      controlsTimeoutRef.current = setTimeout(() => {
+        setShowControls(false);
+      }, 3000);
+    }
+  };
+
+  const handleTouchMove = () => {
     setShowControls(true);
     if (controlsTimeoutRef.current) {
       clearTimeout(controlsTimeoutRef.current);
@@ -219,7 +235,7 @@ export function VideoDemo() {
   return (
     <section
       ref={containerRef}
-      className="relative h-screen flex items-center overflow-hidden perspective-1000"
+      className={`relative h-screen flex items-center overflow-hidden perspective-1000 ${isFullscreen ? "!fixed !inset-0 !h-screen !w-screen !z-[9999]" : ""}`}
     >
       {/* Animated background grid */}
       <motion.div style={{ y: bgY }} className="absolute inset-0">
@@ -299,6 +315,7 @@ export function VideoDemo() {
               ref={playerRef}
               className="relative w-full aspect-video bg-black group"
               onMouseMove={handleMouseMove}
+              onTouchMove={handleTouchMove}
               onKeyDown={handleKeyDown}
               tabIndex={0}
             >
