@@ -1,7 +1,8 @@
 "use client";
 
+import emailjs from "@emailjs/browser";
 import { motion, useInView } from "framer-motion";
-import { useRef, useState, useEffect } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Sparkles } from "lucide-react";
 import { useI18n } from "@/components/i18n-provider";
 
@@ -13,9 +14,23 @@ interface Particle {
   delay: number;
 }
 
+const EMAILJS_SERVICE_ID = "service_0em8v09";
+const EMAILJS_TEMPLATE_ID = "template_loh81ri";
+const EMAILJS_PUBLIC_KEY = "qE34GQkRg544usQjg";
+
+function isValidEmail(value: string) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
 export function CTABanner() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLInputElement>(null);
   const [particles, setParticles] = useState<Particle[]>([]);
+  const [email, setEmail] = useState("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [statusMessage, setStatusMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const [inputError, setInputError] = useState<string | null>(null);
   const { content } = useI18n();
   const isInView = useInView(containerRef, {
     once: true,
@@ -33,6 +48,54 @@ export function CTABanner() {
     }));
     setParticles(generatedParticles);
   }, []);
+
+  // Init EmailJS on client
+  useEffect(() => {
+    try {
+      emailjs.init(EMAILJS_PUBLIC_KEY);
+    } catch (err) {
+      // eslint-disable-next-line no-console
+      console.warn("EmailJS init warning:", err);
+    }
+  }, []);
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setStatusMessage(null);
+    setErrorMessage(null);
+    setInputError(null);
+
+    const trimmedEmail = email.trim();
+
+    if (!isValidEmail(trimmedEmail)) {
+      setInputError("Por favor, ingresa un correo válido.");
+      inputRef.current?.focus();
+      return;
+    }
+
+    try {
+      setIsSubmitting(true);
+
+      // EmailJS expects the public key as the fourth parameter (string),
+      // or to be initialized via emailjs.init(). We already initialized above.
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        {
+          email: trimmedEmail,
+        },
+        EMAILJS_PUBLIC_KEY,
+      );
+
+      setStatusMessage("¡Listo! Recibimos tu solicitud de acceso anticipado.");
+      setEmail("");
+    } catch (error) {
+      console.error("EmailJS send error:", error);
+      setErrorMessage("No pudimos enviar tu solicitud. Intenta de nuevo en un momento.");
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
 
   return (
     <section
@@ -102,20 +165,47 @@ export function CTABanner() {
               </p>
 
               {/* Email signup form */}
-              <div className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto">
+              <form
+                onSubmit={handleSubmit}
+                className="flex flex-col sm:flex-row gap-3 justify-center max-w-md mx-auto"
+              >
                 <input
+                  ref={inputRef}
                   type="email"
+                  value={email}
+                  onChange={(event) => setEmail(event.target.value)}
                   placeholder={content.cta.placeholder}
+                  aria-label={content.cta.placeholder}
                   className="flex-1 px-4 py-3 bg-card border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all"
                 />
                 <motion.button
+                  type="submit"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="px-6 py-3 bg-primary text-primary-foreground rounded-xl font-semibold transition-all hover:shadow-[0_0_30px_rgba(200,240,74,0.4)]"
+                  disabled={isSubmitting}
+                  className="px-6 py-3 bg-primary text-primary-foreground rounded-xl font-semibold transition-all hover:shadow-[0_0_30px_rgba(200,240,74,0.4)] disabled:cursor-not-allowed disabled:opacity-70"
                 >
-                  {content.cta.button}
+                  {isSubmitting ? "Enviando..." : content.cta.button}
                 </motion.button>
-              </div>
+              </form>
+
+              {inputError && (
+                <div className="mx-auto mt-3 max-w-md text-sm text-destructive">
+                  {inputError}
+                </div>
+              )}
+
+              {(errorMessage || statusMessage) && (
+                <div
+                  className={`mx-auto mt-4 max-w-md rounded-xl border px-4 py-3 text-sm ${
+                    errorMessage
+                      ? "border-destructive/30 bg-destructive/10 text-destructive"
+                      : "border-primary/30 bg-primary/10 text-primary"
+                  }`}
+                >
+                  {errorMessage || statusMessage}
+                </div>
+              )}
             </motion.div>
           </div>
         </div>
