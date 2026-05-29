@@ -83,7 +83,7 @@ export function CTABanner() {
           setIsLocked(true);
           setRemainingMs(COOLDOWN_MS - delta);
           // show success message if already requested
-          setStatusMessage(content.cta?.success || "¡Listo! Recibimos tu solicitud de acceso anticipado.");
+          setStatusMessage(content.cta?.success || "");
         } else {
           localStorage.removeItem(STORAGE_KEY);
         }
@@ -109,7 +109,7 @@ export function CTABanner() {
     }
 
     if (!isValidEmail(trimmedEmail)) {
-      setInputError(content.cta?.invalidEmail || "Por favor, ingresa un correo válido.");
+      setInputError(content.cta?.invalidEmail || "");
       inputRef.current?.focus();
       return;
     }
@@ -136,14 +136,14 @@ export function CTABanner() {
       }
       setIsLocked(true);
       setRemainingMs(COOLDOWN_MS);
-      setStatusMessage(content.cta?.success || "¡Listo! Recibimos tu solicitud de acceso anticipado.");
+      setStatusMessage(content.cta?.success || "");
       setEmail("");
     } catch (error) {
       console.error("EmailJS send error:", error);
       // Try to surface a helpful error message for debugging in dev/deploy
       const msg = (error as any)?.text || (error as any)?.message || String(error);
-      const generic = content.cta?.error || "No pudimos enviar tu solicitud. Intenta de nuevo en un momento.";
-      setErrorMessage(`${generic} ${msg ? `Detalle: ${msg}` : ""}`);
+      const generic = content.cta?.error || "";
+      setErrorMessage(`${generic}${msg ? ` (${msg})` : ""}`);
     } finally {
       setIsSubmitting(false);
     }
