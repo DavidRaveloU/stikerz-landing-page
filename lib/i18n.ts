@@ -156,6 +156,11 @@ export const messages = {
         "Sign up to receive a notification when Stikerz is available on Google Play",
       placeholder: "your@email.com",
       button: "Notify me",
+      sending: "Sending...",
+      success: "Great! We've received your early access request.",
+      error: "We couldn't send your request. Please try again later.",
+      invalidEmail: "Please enter a valid email.",
+      alreadyRequested: "We've already received your request — try again in {time}.",
     },
     footer: {
       links: {
@@ -317,6 +322,11 @@ export const messages = {
         "Regístrate para recibir una notificación cuando Stikerz esté disponible en Google Play",
       placeholder: "tu@email.com",
       button: "Notificarme",
+      sending: "Enviando...",
+      success: "¡Listo! Recibimos tu solicitud de acceso anticipado.",
+      error: "No pudimos enviar tu solicitud. Intenta de nuevo en un momento.",
+      invalidEmail: "Por favor, ingresa un correo válido.",
+      alreadyRequested: "Ya registramos tu solicitud. Vuelve a intentarlo en {time}.",
     },
     footer: {
       links: {
@@ -478,6 +488,11 @@ export const messages = {
         "Cadastre-se para receber uma notificação quando o Stikerz estiver disponível no Google Play",
       placeholder: "seu@email.com",
       button: "Me avise",
+      sending: "Enviando...",
+      success: "Pronto! Recebemos sua solicitação de acesso antecipado.",
+      error: "Não foi possível enviar sua solicitação. Tente novamente mais tarde.",
+      invalidEmail: "Por favor, insira um e-mail válido.",
+      alreadyRequested: "Já recebemos sua solicitação. Tente novamente em {time}.",
     },
     footer: {
       links: {

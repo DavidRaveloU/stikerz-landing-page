@@ -59,6 +59,40 @@ export function CTABanner() {
     }
   }, []);
 
+  // Cooldown to prevent repeated requests from same browser
+  const COOLDOWN_MS = 24 * 60 * 60 * 1000; // 24 hours
+  const STORAGE_KEY = "stikerz_cta_last";
+  const [isLocked, setIsLocked] = useState(false);
+  const [remainingMs, setRemainingMs] = useState<number | null>(null);
+
+  const formatRemaining = (ms: number) => {
+    const mins = Math.ceil(ms / 60000);
+    if (mins < 60) return `${mins}m`;
+    const hrs = Math.floor(mins / 60);
+    const remMins = mins % 60;
+    return remMins === 0 ? `${hrs}h` : `${hrs}h ${remMins}m`;
+  };
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem(STORAGE_KEY);
+      const last = raw ? parseInt(raw, 10) : 0;
+      if (last) {
+        const delta = Date.now() - last;
+        if (delta < COOLDOWN_MS) {
+          setIsLocked(true);
+          setRemainingMs(COOLDOWN_MS - delta);
+          // show success message if already requested
+          setStatusMessage(content.cta?.success || "¡Listo! Recibimos tu solicitud de acceso anticipado.");
+        } else {
+          localStorage.removeItem(STORAGE_KEY);
+        }
+      }
+    } catch (err) {
+      // ignore localStorage errors
+    }
+  }, []);
+
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatusMessage(null);
@@ -67,8 +101,15 @@ export function CTABanner() {
 
     const trimmedEmail = email.trim();
 
+    if (isLocked) {
+      const timeStr = remainingMs ? formatRemaining(remainingMs) : formatRemaining(COOLDOWN_MS);
+      const msgTemplate = content.cta?.alreadyRequested || "We've already received your request — try again in {time}.";
+      setErrorMessage(msgTemplate.replace('{time}', timeStr));
+      return;
+    }
+
     if (!isValidEmail(trimmedEmail)) {
-      setInputError("Por favor, ingresa un correo válido.");
+      setInputError(content.cta?.invalidEmail || "Por favor, ingresa un correo válido.");
       inputRef.current?.focus();
       return;
     }
@@ -87,13 +128,22 @@ export function CTABanner() {
         EMAILJS_PUBLIC_KEY,
       );
 
-      setStatusMessage("¡Listo! Recibimos tu solicitud de acceso anticipado.");
+      // mark as submitted in localStorage to prevent repeated sends
+      try {
+        localStorage.setItem(STORAGE_KEY, String(Date.now()));
+      } catch (err) {
+        // ignore
+      }
+      setIsLocked(true);
+      setRemainingMs(COOLDOWN_MS);
+      setStatusMessage(content.cta?.success || "¡Listo! Recibimos tu solicitud de acceso anticipado.");
       setEmail("");
     } catch (error) {
       console.error("EmailJS send error:", error);
       // Try to surface a helpful error message for debugging in dev/deploy
       const msg = (error as any)?.text || (error as any)?.message || String(error);
-      setErrorMessage(`No pudimos enviar tu solicitud. ${msg ? `Detalle: ${msg}` : "Intenta de nuevo en un momento."}`);
+      const generic = content.cta?.error || "No pudimos enviar tu solicitud. Intenta de nuevo en un momento.";
+      setErrorMessage(`${generic} ${msg ? `Detalle: ${msg}` : ""}`);
     } finally {
       setIsSubmitting(false);
     }
@@ -178,16 +228,17 @@ export function CTABanner() {
                   onChange={(event) => setEmail(event.target.value)}
                   placeholder={content.cta.placeholder}
                   aria-label={content.cta.placeholder}
+                  disabled={isLocked}
                   className="flex-1 px-4 py-3 bg-card border border-border rounded-xl text-foreground placeholder:text-muted-foreground focus:outline-none focus:border-primary/50 focus:ring-2 focus:ring-primary/20 transition-all"
                 />
                 <motion.button
                   type="submit"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  disabled={isSubmitting}
+                  disabled={isSubmitting || isLocked}
                   className="px-6 py-3 bg-primary text-primary-foreground rounded-xl font-semibold transition-all hover:shadow-[0_0_30px_rgba(200,240,74,0.4)] disabled:cursor-not-allowed disabled:opacity-70"
                 >
-                  {isSubmitting ? "Enviando..." : content.cta.button}
+                  {isSubmitting ? content.cta?.sending || "Enviando..." : content.cta.button}
                 </motion.button>
               </form>
 
