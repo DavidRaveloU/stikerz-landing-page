@@ -91,7 +91,9 @@ export function CTABanner() {
       setEmail("");
     } catch (error) {
       console.error("EmailJS send error:", error);
-      setErrorMessage("No pudimos enviar tu solicitud. Intenta de nuevo en un momento.");
+      // Try to surface a helpful error message for debugging in dev/deploy
+      const msg = (error as any)?.text || (error as any)?.message || String(error);
+      setErrorMessage(`No pudimos enviar tu solicitud. ${msg ? `Detalle: ${msg}` : "Intenta de nuevo en un momento."}`);
     } finally {
       setIsSubmitting(false);
     }
